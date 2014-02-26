@@ -1,7 +1,7 @@
 # Classic : Usage
 
-
-The module should be dropped in to an existing project and required by it:
+The [module](src/classic.lua) should be dropped in to an existing project and
+required by it:
 
 ```lua
 Object = require "classic"
