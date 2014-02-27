@@ -6,7 +6,7 @@ performance by avoiding unnecessary over-abstraction.
 
 ## Usage
 
-The [module](src/classic.lua) should be dropped in to an existing project and
+The [module](classic.lua) should be dropped in to an existing project and
 required by it:
 
 ```lua
