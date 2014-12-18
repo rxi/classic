@@ -1,4 +1,4 @@
-# Classic
+# Classic [![Build Status](https://api.travis-ci.org/thefosk/classic.png)](https://travis-ci.org/thefosk/classic)
 
 A tiny class module for Lua. Attempts to stay simple and provide decent
 performance by avoiding unnecessary over-abstraction.
@@ -48,7 +48,7 @@ end
 local p = Point(10, 20)
 print(p:is(Object)) -- true
 print(p:is(Point)) -- true
-print(p:is(Rect)) -- false 
+print(p:is(Rect)) -- false
 ```
 
 ### Using mixins
@@ -102,4 +102,3 @@ end
 
 This module is free software; you can redistribute it and/or modify it under
 the terms of the MIT license. See [LICENSE](LICENSE) for details.
-
