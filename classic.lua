@@ -60,8 +60,12 @@ end
 
 function Object:__call(...)
   local obj = setmetatable({}, self)
-  obj:new(...)
-  return obj
+  local res, err = obj:new(...)
+  if not err then
+    return obj
+  else
+    return res, err
+  end
 end
 
 
