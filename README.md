@@ -1,4 +1,4 @@
-# Classic
+# Classic [![Build Status](https://api.travis-ci.org/thefosk/classic.png)](https://travis-ci.org/thefosk/classic)
 
 A tiny class module for Lua. Attempts to stay simple and provide decent
 performance by avoiding unnecessary over-abstraction.
