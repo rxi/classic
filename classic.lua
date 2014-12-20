@@ -16,6 +16,25 @@ function Object:new()
 end
 
 
+local function deepCopy(object)
+    local lookup_table = {}
+    local function _copy(object)
+        if type(object) ~= "table" then
+            return object
+        elseif lookup_table[object] then
+            return lookup_table[object]
+        end
+        local new_table = {}
+        lookup_table[object] = new_table
+        for index, value in pairs(object) do
+            new_table[_copy(index)] = _copy(value)
+        end
+        return setmetatable(new_table, getmetatable(object))
+    end
+    return _copy(object)
+end
+
+
 function Object:extend()
   local cls = {}
   for k, v in pairs(self) do
@@ -23,9 +42,10 @@ function Object:extend()
       cls[k] = v
     end
   end
+  local instance = deepCopy(self)
   cls.__index = cls
-  cls.super = self
-  setmetatable(cls, self)
+  cls.super = instance
+  setmetatable(cls, instance)
   return cls
 end
 
