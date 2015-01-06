@@ -15,7 +15,7 @@ end
 -- ClassOne extends BaseClass
 local ClassOne = BaseClass:extend()
 function ClassOne:new(name)
-  ClassOne.super:new(name)
+  ClassOne.super.new(self, name)
 end
 function ClassOne.say_something()
   return "something better"
@@ -24,7 +24,10 @@ end
 -- ClassTwo extends BaseClass
 local ClassTwo = BaseClass:extend()
 function ClassTwo:new(name)
-  ClassTwo.super:new(name)
+  if name == "wrong" then
+    error({message = "Wrong value"})
+  end
+  ClassTwo.super.new(self, name)
 end
 
 describe("classic #classic", function()
@@ -43,6 +46,13 @@ describe("classic #classic", function()
 
       assert.are.same("something better", class_one:say_something())
       assert.are.same("something", class_two:say_something())
+    end)
+    it("Constructor returns error", function()
+      local status, res = pcall(ClassTwo, "wrong")
+
+      assert.falsy(status)
+      assert.truthy(res)
+      assert.are.same("Wrong value", res.message)
     end)
 
   end)
