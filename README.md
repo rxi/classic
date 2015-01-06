@@ -1,4 +1,4 @@
-# Classic
+# Classic [![Build Status](https://api.travis-ci.org/thefosk/classic.png)](https://travis-ci.org/thefosk/classic)
 
 A tiny class module for Lua. Attempts to stay simple and provide decent
 performance by avoiding unnecessary over-abstraction.
@@ -48,7 +48,7 @@ end
 local p = Point(10, 20)
 print(p:is(Object)) -- true
 print(p:is(Point)) -- true
-print(p:is(Rect)) -- false 
+print(p:is(Rect)) -- false
 ```
 
 ### Using mixins
@@ -94,6 +94,27 @@ end
 ```lua
 function Point:__tostring()
   return self.x .. ", " .. self.y
+end
+```
+
+### Returning constructor errors
+```lua
+Rect = Point:extend()
+
+function Rect:new(x, y, width, height)
+  if width > 100 then
+    return nil, "Width can't be greater than 100"
+  end
+
+  Rect.super.new(self, x, y)
+  self.width = width or 0
+  self.height = height or 0
+end
+
+
+local rect, err = Rect(10, 20, 200, 200)
+if not rect then
+  print(err) -- The err variable contains the error message
 end
 ```
 
