@@ -44,8 +44,24 @@ describe("classic #classic", function()
       local classOne = ClassOne("Mark")
       local classTwo = ClassTwo("John")
 
-      assert.are.same("something better", classOne:getSomething())
-      assert.are.same("something", classTwo:getSomething())
+      spy.on(classOne, "getSomething")
+      spy.on(classTwo, "getSomething")
+
+      assert.are.same("something better", classOne.getSomething())
+      assert.are.same("something", classTwo.getSomething())
+
+      -- Make sure no arguments have been passed
+      assert.spy(classOne.getSomething).was_called_with()
+      assert.spy(classTwo.getSomething).was_called_with()
+
+      assert.are.same("something better", classOne.getSomething("hello"))
+      assert.spy(classOne.getSomething).was_called_with("hello")
+
+      -- Removing the spies
+      finally(function()
+        classOne.getSomething:revert()
+        classTwo.getSomething:revert()
+      end)
     end)
     it("Constructor returns error", function()
       local status, res = pcall(ClassTwo, "wrong")
