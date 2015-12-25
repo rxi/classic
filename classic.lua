@@ -41,8 +41,21 @@ function Object:implement(...)
 end
 
 
-function Object:is(T)
+function Object:isinstance(T)
   local mt = getmetatable(self)
+  while mt do
+    if mt == T then
+      return true
+    end
+    mt = getmetatable(mt)
+  end
+  return false
+end
+
+
+function Object:issubclass(T)
+  assert(rawget(self, "super"), "is not a class")
+  local mt = self
   while mt do
     if mt == T then
       return true
