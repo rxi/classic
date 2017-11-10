@@ -1,12 +1,11 @@
---
--- classic
---
--- Copyright (c) 2014, rxi
---
--- This module is free software; you can redistribute it and/or modify it under
--- the terms of the MIT license. See LICENSE for details.
---
+--[[
+    classic
 
+    Copyright (c) 2014, rxi
+
+    This module is free software; you can redistribute it and/or modify it under
+    the terms of the MIT license. See LICENSE for details.
+--]]
 
 local Object = {}
 Object.__index = Object
