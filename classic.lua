@@ -65,4 +65,27 @@ function Object:__call(...)
 end
 
 
+if _G.common_class then
+	local common = {}
+
+	function common.class(_, definition, superclass)
+		superclass = superclass or Object
+
+		local class = superclass:extend()
+		for i, v in pairs(definition) do
+			class[i] = v
+		end
+
+		class.new = definition.init or superclass.new or superclass.init
+
+		return class
+	end
+
+	function common.instance(class, ...)
+		return class(...)
+	end
+
+	_G.common = common
+end
+
 return Object
